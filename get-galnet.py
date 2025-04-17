@@ -108,6 +108,7 @@ def save_articles_from_page(url, fix_missing_titles=True, skip_existing=True, se
         return
 
     articles = soup.select('div.article')
+    narts = len(articles)
     date_counter = {}
 
     for art in articles:
@@ -128,7 +129,7 @@ def save_articles_from_page(url, fix_missing_titles=True, skip_existing=True, se
         date_counter[norm_date] = date_counter.get(norm_date, 0) + 1
         index = date_counter[norm_date]
 
-        if index == 1:
+        if narts == 1:
             filename = f"{year_dir}/{norm_date}.md"
         else:
             filename = f"{year_dir}/{norm_date} ({index}).md"
