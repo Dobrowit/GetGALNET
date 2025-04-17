@@ -128,7 +128,11 @@ def save_articles_from_page(url, fix_missing_titles=True, skip_existing=True, se
         date_counter[norm_date] = date_counter.get(norm_date, 0) + 1
         index = date_counter[norm_date]
 
-        filename = f"{year_dir}/{norm_date} ({index}).md"
+        if index == 1:
+            filename = f"{year_dir}/{norm_date}.md"
+        else:
+            filename = f"{year_dir}/{norm_date} ({index}).md"
+
         if skip_existing and os.path.exists(filename):
             print(f"Pomijam istniejący plik: {filename}")
             continue
